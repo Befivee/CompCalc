@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор комплексных чисел</title>
+
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/png" href="/calculator_calc_icon_123487.png">
+</head>
+<body>
+    <!-- Поля для ввода первого комплексного числа -->
+    <div>
+        <label for="real1">Real part of Z1:</label>
+        <input type="number" id="real1" step="any">
+        <label for="imag1">Imaginary part of Z1:</label>
+        <input type="number" id="imag1" step="any">
+    </div>
+
+    <!-- Поля для ввода второго комплексного числа -->
+    <div>
+        <label for="real2">Real part of Z2:</label>
+        <input type="number" id="real2" step="any">
+        <label for="imag2">Imaginary part of Z2:</label>
+        <input type="number" id="imag2" step="any">
+    </div>
+
+    <!-- Кнопки для операций -->
+    <div>
+        <button onclick="performOperation('add')">Add</button>
+        <button onclick="performOperation('subtract')">Subtract</button>
+        <button onclick="performOperation('multiply')">Multiply</button>
+        <button onclick="performOperation('divide')">Divide</button>
+    </div>
+
+    <!-- Вывод результата -->
+    <div>
+        <h3>Result: <span id="result">N/A</span></h3>
+    </div>
+
+    <script type="text/javascript">
+        // Функция для вызова Python-функций через Eel
+        async function performOperation(operation) {
+            const real1 = parseFloat(document.getElementById('real1').value);
+            const imag1 = parseFloat(document.getElementById('imag1').value);
+            const real2 = parseFloat(document.getElementById('real2').value);
+            const imag2 = parseFloat(document.getElementById('imag2').value);
+
+            let result;
+            switch (operation) {
+                case 'add':
+                    result = await eel.add_complex(real1, imag1, real2, imag2)();
+                    break;
+                case 'subtract':
+                    result = await eel.subtract_complex(real1, imag1, real2, imag2)();
+                    break;
+                case 'multiply':
+                    result = await eel.multiply_complex(real1, imag1, real2, imag2)();
+                    break;
+                case 'divide':
+                    result = await eel.divide_complex(real1, imag1, real2, imag2)();
+                    break;
+            }
+            document.getElementById('result').textContent = result;
+        }
+    </script>
+</body>
+</html>
