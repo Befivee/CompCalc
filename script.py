@@ -63,4 +63,4 @@ def divide_complex(real1, imag1, real2, imag2):
     return str(result)
 
 # Запуск интерфейса
-eel.start('main.html', size=(600, 400))
+eel.start('main.html', size=(700, 400))
